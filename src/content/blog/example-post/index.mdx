@@ -1,0 +1,57 @@
+---
+title: "Example Post: Demonstrating All Features"
+date: 2026-02-10
+tags: ["astro", "math", "mermaid"]
+draft: false
+---
+
+import Mermaid from '../../../components/Mermaid.astro';
+import diagram from './diagram.mmd?raw';
+
+This is an example blog post that demonstrates all supported content features.
+
+## LaTeX Math
+
+Einstein's famous equation inline: $E = mc^2$.
+
+A display equation using the Gaussian integral:
+
+$$
+\int_0^\infty e^{-x^2}\, dx = \frac{\sqrt{\pi}}{2}
+$$
+
+And the quadratic formula:
+
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+
+## Mermaid Diagram
+
+The following diagram is imported from `diagram.mmd`:
+
+<Mermaid chart={diagram} />
+
+## Image
+
+Here is an image referenced via a relative path:
+
+![Placeholder image](./example-image.png)
+
+## Code Block
+
+A syntax-highlighted code block:
+
+```python
+def fibonacci(n: int) -> list[int]:
+    """Return the first n Fibonacci numbers."""
+    seq = []
+    a, b = 0, 1
+    for _ in range(n):
+        seq.append(a)
+        a, b = b, a + b
+    return seq
+
+print(fibonacci(10))
+# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+```

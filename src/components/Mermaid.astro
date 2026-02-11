@@ -1,0 +1,38 @@
+---
+interface Props {
+  chart: string;
+}
+
+const { chart } = Astro.props;
+---
+
+<pre class="mermaid" set:text={chart} />
+
+<script>
+  import mermaid from 'mermaid';
+
+  const getMermaidTheme = () => {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'neutral';
+  };
+
+  const renderMermaid = async () => {
+    const blocks = document.querySelectorAll('pre.mermaid');
+    if (!blocks.length) return;
+
+    for (const block of blocks) {
+      if (!block.dataset.chart) {
+        block.dataset.chart = block.textContent?.trim() || '';
+      }
+      block.removeAttribute('data-processed');
+      block.textContent = block.dataset.chart;
+    }
+
+    mermaid.initialize({ startOnLoad: false, theme: getMermaidTheme() });
+    await mermaid.run({ querySelector: 'pre.mermaid' });
+  };
+
+  renderMermaid();
+  window.addEventListener('themechange', () => {
+    renderMermaid();
+  });
+</script>

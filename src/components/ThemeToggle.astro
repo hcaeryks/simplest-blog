@@ -1,0 +1,38 @@
+<div class="top-controls">
+  <button id="theme-toggle" type="button" aria-live="polite" aria-label="Switch theme"></button>
+</div>
+
+<script is:inline>
+  const STORAGE_KEY = 'theme-preference';
+
+  const getPreferredTheme = () => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'light' || stored === 'dark') return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  const setTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    const toggleButton = document.getElementById('theme-toggle');
+    if (toggleButton) {
+      const next = theme === 'dark' ? 'light' : 'dark';
+      const icon = theme === 'dark' ? 'sun' : 'moon';
+      toggleButton.setAttribute('data-icon', icon);
+      toggleButton.setAttribute('aria-label', `Switch to ${next} mode`);
+    }
+  };
+
+  const currentTheme = getPreferredTheme();
+  setTheme(currentTheme);
+
+  const toggleButton = document.getElementById('theme-toggle');
+  if (toggleButton) {
+    toggleButton.addEventListener('click', () => {
+      const active = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const nextTheme = active === 'dark' ? 'light' : 'dark';
+      localStorage.setItem(STORAGE_KEY, nextTheme);
+      setTheme(nextTheme);
+      window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: nextTheme } }));
+    });
+  }
+</script>

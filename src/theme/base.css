@@ -1,0 +1,211 @@
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Theme tokens ===== */
+:root {
+  --bg: #ffffff;
+  --text: #222222;
+  --heading: #111111;
+  --link: #1a6dcc;
+  --muted: #666666;
+  --border: #dddddd;
+  --inline-code-bg: #f3f4f6;
+  --code-bg: #1e1e2e;
+  --code-text: #cdd6f4;
+  --mermaid-bg: #fafbfc;
+  --mermaid-border: #e1e4e8;
+  --toggle-bg: #f8f9fb;
+  --toggle-border: #d0d7de;
+}
+
+html[data-theme='dark'] {
+  --bg: #0f1115;
+  --text: #e5e7eb;
+  --heading: #f3f4f6;
+  --link: #7bb4ff;
+  --muted: #a7adb8;
+  --border: #2a2f38;
+  --inline-code-bg: #20242c;
+  --code-bg: #151922;
+  --code-text: #e6e9ef;
+  --mermaid-bg: #171b22;
+  --mermaid-border: #2b313b;
+  --toggle-bg: #171b22;
+  --toggle-border: #2b313b;
+}
+
+html {
+  background: var(--bg);
+}
+
+/* ===== Layout ===== */
+body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ===== Typography ===== */
+body {
+  font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--heading);
+}
+
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.15rem; }
+
+p {
+  margin: 0 0 1rem;
+}
+
+/* ===== Links ===== */
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Horizontal Rule ===== */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+/* ===== Images ===== */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* ===== Code ===== */
+code, pre, kbd {
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", monospace;
+}
+
+code {
+  font-size: 0.88em;
+  background: var(--inline-code-bg);
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+}
+
+pre {
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: 1.25rem 1.5rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  line-height: 1.5;
+  margin: 1.5rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.85em;
+  color: inherit;
+}
+
+/* ===== Nav ===== */
+nav {
+  margin-bottom: 1.5rem;
+}
+
+nav a {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+nav a:hover {
+  color: var(--link);
+}
+
+/* ===== KaTeX ===== */
+
+/* Hide MathML source — prevents browsers with native MathML support
+   from rendering duplicate plain-text equations alongside the HTML output. */
+.katex-mathml {
+  display: none;
+}
+
+.katex-display {
+  margin: 1.75rem 0;
+  overflow-x: auto;
+}
+
+/* ===== Mermaid ===== */
+pre.mermaid {
+  background: var(--mermaid-bg);
+  color: var(--text);
+  border: 1px solid var(--mermaid-border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===== Theme switcher ===== */
+.top-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+#theme-toggle {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.15rem;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#theme-toggle:hover {
+  color: var(--link);
+}
+
+#theme-toggle::before {
+  content: "◐";
+}
+
+#theme-toggle[data-icon='moon']::before {
+  content: "☾";
+}
+
+#theme-toggle[data-icon='sun']::before {
+  content: "☀";
+}
